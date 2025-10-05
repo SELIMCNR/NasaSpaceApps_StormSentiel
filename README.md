@@ -62,7 +62,7 @@ StormSentinel bridges the gap between complex scientific data and public action.
 ### 📽️ Demo
 
 Watch the 30-second demo:  
-[https://drive.google.com/file/d/your-demo-id/view](https://drive.google.com/file/d/your-demo-id/view)
+[https://drive.google.com/file/d/your-demo-id/view](https://drive.google.com/file/d/your-demo-id/view)](https://drive.google.com/drive/u/0/home)
 
 ---
 
