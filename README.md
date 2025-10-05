@@ -77,6 +77,3 @@ AI tools were used to assist in code generation, UI/UX planning, and strategic p
 This project is open-source under the MIT License.  
 All NASA data used is publicly available and properly cited.
 
----
-
-Hazırsan bu metni GitHub’a ekleyebilirsin. İstersen slayt sunumu için de 7 sayfalık demo taslağı hazırlayabilirim. Devam edelim mi?
