@@ -1,0 +1,94 @@
+{
+    "zones": [
+        {
+            "name_tr": "Kuzeybatı",
+            "name_en": "Northwest",
+            "risk_score": 0,
+            "level_tr": "İyi",
+            "level_en": "Good",
+            "actions_tr": [
+                "Açık hava aktiviteleri serbest ve önerilir.",
+                "Pencere/kapıları açmak güvenlidir."
+            ],
+            "actions_en": [
+                "Outdoor activities are permitted and encouraged.",
+                "Opening windows/doors is safe."
+            ]
+        },
+        {
+            "name_tr": "Güneybatı",
+            "name_en": "Southwest",
+            "risk_score": 0,
+            "level_tr": "İyi",
+            "level_en": "Good",
+            "actions_tr": [
+                "Açık hava aktiviteleri serbest ve önerilir.",
+                "Pencere/kapıları açmak güvenlidir."
+            ],
+            "actions_en": [
+                "Outdoor activities are permitted and encouraged.",
+                "Opening windows/doors is safe."
+            ]
+        },
+        {
+            "name_tr": "Güney Orta",
+            "name_en": "South Central",
+            "risk_score": 0,
+            "level_tr": "İyi",
+            "level_en": "Good",
+            "actions_tr": [
+                "Açık hava aktiviteleri serbest ve önerilir.",
+                "Pencere/kapıları açmak güvenlidir."
+            ],
+            "actions_en": [
+                "Outdoor activities are permitted and encouraged.",
+                "Opening windows/doors is safe."
+            ]
+        },
+        {
+            "name_tr": "Kuzey Orta",
+            "name_en": "North Central",
+            "risk_score": 0,
+            "level_tr": "İyi",
+            "level_en": "Good",
+            "actions_tr": [
+                "Açık hava aktiviteleri serbest ve önerilir.",
+                "Pencere/kapıları açmak güvenlidir."
+            ],
+            "actions_en": [
+                "Outdoor activities are permitted and encouraged.",
+                "Opening windows/doors is safe."
+            ]
+        },
+        {
+            "name_tr": "Güneydoğu",
+            "name_en": "Southeast",
+            "risk_score": 0,
+            "level_tr": "İyi",
+            "level_en": "Good",
+            "actions_tr": [
+                "Açık hava aktiviteleri serbest ve önerilir.",
+                "Pencere/kapıları açmak güvenlidir."
+            ],
+            "actions_en": [
+                "Outdoor activities are permitted and encouraged.",
+                "Opening windows/doors is safe."
+            ]
+        },
+        {
+            "name_tr": "Kuzeydoğu",
+            "name_en": "Northeast",
+            "risk_score": 0,
+            "level_tr": "İyi",
+            "level_en": "Good",
+            "actions_tr": [
+                "Açık hava aktiviteleri serbest ve önerilir.",
+                "Pencere/kapıları açmak güvenlidir."
+            ],
+            "actions_en": [
+                "Outdoor activities are permitted and encouraged.",
+                "Opening windows/doors is safe."
+            ]
+        }
+    ]
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AQI Panel - TEMPO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f7f7f7;
+      }
+      .nav-link {
+        transition: all 0.2s;
+      }
+      .nav-link.active {
+        border-color: #4f46e5;
+        color: #4f46e5;
+        font-weight: 600;
+      }
+    </style>
+    <script>
+      // Veri güncelleme sürecinde kullanıcıya geri bildirim sağlamak için
+      function updateData() {
+        const button = document.getElementById("updateButton");
+        button.disabled = true;
+        button.innerHTML =
+          '<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Veriler Güncelleniyor... (Lütfen Bekleyin)';
+
+        // Gerçek güncelleme isteğini yap
+        window.location.href = "{{ url_for('update_data') }}";
+      }
+
+      function getColorClass(aqi) {
+        if (aqi === "N/A") return "text-gray-500 bg-gray-100";
+        const score = parseInt(aqi);
+        if (score <= 50) return "text-green-700 bg-green-100"; // İyi
+        if (score <= 100) return "text-yellow-700 bg-yellow-100"; // Orta
+        if (score <= 150) return "text-orange-700 bg-orange-100"; // Hassas
+        if (score <= 200) return "text-red-700 bg-red-100"; // Sağlıksız
+        return "text-purple-700 bg-purple-100"; // Çok Sağlıksız
+      }
+
+      window.onload = function () {
+        const aqiElement = document.getElementById("avgAqiScore");
+        const aqiValue = aqiElement.textContent.trim();
+        aqiElement.className = `text-6xl font-extrabold p-4 rounded-xl shadow-inner ${getColorClass(
+          aqiValue
+        )} inline-block`;
+      };
+    </script>
+  </head>
+  <body>
+    <div class="min-h-screen bg-gray-50 p-6">
+      <!-- Başlık ve Navigasyon -->
+      <header class="bg-white shadow-md rounded-xl p-4 mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">TEMPO AQI Risk Paneli</h1>
+        <nav class="mt-4 flex space-x-4 border-b pb-2">
+          <a
+            href="{{ url_for('aqi_panel') }}"
+            class="nav-link active border-b-2 px-3 py-1"
+            >Özet (AQI)</a
+          >
+          <a
+            href="{{ url_for('aqi_map_graph_panel') }}"
+            class="nav-link hover:border-b-2 border-transparent px-3 py-1 text-gray-600 hover:text-indigo-600"
+            >Harita & Grafik</a
+          >
+          <a
+            href="{{ url_for('decision_support') }}"
+            class="nav-link hover:border-b-2 border-transparent px-3 py-1 text-gray-600 hover:text-indigo-600"
+            >Karar Destek</a
+          >
+          <a
+            href="{{ url_for('data_sources') }}"
+            class="nav-link hover:border-b-2 border-transparent px-3 py-1 text-gray-600 hover:text-indigo-600"
+            >Veri Kaynakları</a
+          >
+        </nav>
+      </header>
+
+      <main>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <!-- Sol Panel: Ana Metrik -->
+          <div
+            class="lg:col-span-2 bg-white p-8 rounded-xl shadow-lg border-l-4 border-indigo-500"
+          >
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">
+              İşlenen Bölgelerin Ortalama AQI Skoru
+            </h2>
+            <div class="flex items-center space-x-6">
+              <span
+                id="avgAqiScore"
+                class="text-6xl font-extrabold p-4 rounded-xl shadow-inner"
+              >
+                {{ avg_aqi }}
+              </span>
+              <div class="text-gray-500">
+                <p class="text-sm">
+                  Hesaplanan tüm izleme zonlarının ortalama risk seviyesini
+                  gösterir.
+                </p>
+                <p class="text-sm mt-1">
+                  Son Güncelleme:
+                  <span class="font-medium text-gray-700"
+                    >Tarih/Saat Bilgisi (Yazılımla Eklenmeli)</span
+                  >
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <h3 class="text-lg font-semibold text-gray-700 mb-3">
+                Durum Açıklaması
+              </h3>
+              <p class="text-gray-600 p-3 bg-indigo-50 rounded-lg">
+                AQI skoru, azot dioksit (NO2) konsantrasyonlarına göre
+                hesaplanmıştır. Yüksek skor, bölgedeki hava kalitesinin hassas
+                veya sağlıksız olabileceğini gösterir.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sağ Panel: Eylem ve Kontrol -->
+          <div
+            class="bg-white p-6 rounded-xl shadow-lg flex flex-col justify-between"
+          >
+            <div>
+              <h2 class="text-xl font-semibold text-gray-700 mb-4">
+                Veri Akışı Kontrolü
+              </h2>
+              <p class="text-gray-600 mb-4 text-sm">
+                En güncel TEMPO verilerini çekmek, AQI'yı hesaplamak ve
+                görselleştirmeleri oluşturmak için butona tıklayın. Bu işlem
+                biraz zaman alabilir.
+              </p>
+              <button
+                id="updateButton"
+                onclick="updateData()"
+                class="w-full bg-green-600 text-white font-bold py-3 rounded-lg shadow-md hover:bg-green-700 transition duration-300 transform hover:scale-[1.02]"
+              >
+                📡 TEMPO Verilerini Güncelle ve İşle
+              </button>
+            </div>
+
+            <div class="mt-6 pt-4 border-t">
+              <h3 class="text-lg font-semibold text-gray-700 mb-2">
+                Hızlı Erişim
+              </h3>
+              <ul class="space-y-2">
+                <li>
+                  <a
+                    href="{{ url_for('aqi_map_graph_panel') }}"
+                    class="text-indigo-600 hover:text-indigo-800 text-sm"
+                    >→ Harita ve Görsel Analiz</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="{{ url_for('decision_support') }}"
+                    class="text-indigo-600 hover:text-indigo-800 text-sm"
+                    >→ Eylem Planları ve Karar Destek</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+{
+    "labels_tr": [
+        "Kuzey Orta",
+        "Kuzeydoğu",
+        "Kuzeybatı",
+        "Güney Orta",
+        "Güneydoğu",
+        "Güneybatı"
+    ],
+    "labels_en": [
+        "North Central",
+        "Northeast",
+        "Northwest",
+        "South Central",
+        "Southeast",
+        "Southwest"
+    ],
+    "values": [
+        -1591799999999984.0,
+        -3333333333333334.0,
+        -3115555555553.0,
+        -2153128205128202.0,
+        -3333333333333333.0,
+        -4039999999996.0
+    ],
+    "colors": [
+        "#00e400",
+        "#00e400",
+        "#00e400",
+        "#00e400",
+        "#00e400",
+        "#00e400"
+    ],
+    "title_tr": "TEMPO Bölgelerine Göre Ortalama AQI Skoru",
+    "title_en": "Average AQI Score by TEMPO Zone",
+    "max_value": 200
+}

@@ -1,0 +1,89 @@
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harita ve Grafik Görselleştirme</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f7f7f7;
+      }
+      .nav-link {
+        transition: all 0.2s;
+      }
+      .nav-link.active {
+        border-color: #4f46e5;
+        color: #4f46e5;
+        font-weight: 600;
+      }
+      /* iFrame'lerin tam genişlik/yükseklik kaplamasını sağlar */
+      .visual-frame {
+        width: 100%;
+        min-height: 70vh;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="min-h-screen bg-gray-50 p-6">
+      <!-- Başlık ve Navigasyon -->
+      <header class="bg-white shadow-md rounded-xl p-4 mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">
+          AQI Harita ve Grafik Analizi
+        </h1>
+        <nav class="mt-4 flex space-x-4 border-b pb-2">
+          <a
+            href="{{ url_for('aqi_panel') }}"
+            class="nav-link hover:border-b-2 border-transparent px-3 py-1 text-gray-600 hover:text-indigo-600"
+            >Özet (AQI)</a
+          >
+          <a
+            href="{{ url_for('aqi_map_graph_panel') }}"
+            class="nav-link active border-b-2 px-3 py-1"
+            >Harita & Grafik</a
+          >
+          <a
+            href="{{ url_for('decision_support') }}"
+            class="nav-link hover:border-b-2 border-transparent px-3 py-1 text-gray-600 hover:text-indigo-600"
+            >Karar Destek</a
+          >
+          <a
+            href="{{ url_for('data_sources') }}"
+            class="nav-link hover:border-b-2 border-transparent px-3 py-1 text-gray-600 hover:text-indigo-600"
+            >Veri Kaynakları</a
+          >
+        </nav>
+      </header>
+
+      <main class="space-y-6">
+        <!-- Harita Görselleştirmesi -->
+        <div class="bg-white p-4 rounded-xl shadow-lg">
+          <h2 class="text-2xl font-semibold text-gray-700 mb-3 border-b pb-2">
+            Bölgelere Göre AQI Risk Haritası
+          </h2>
+          <iframe
+            src="{{ url_for('aqi_map') }}"
+            class="visual-frame rounded-lg shadow-inner"
+          ></iframe>
+        </div>
+
+        <!-- Grafik Görselleştirmesi -->
+        <div class="bg-white p-4 rounded-xl shadow-lg">
+          <h2 class="text-2xl font-semibold text-gray-700 mb-3 border-b pb-2">
+            Bölgesel AQI Skor Dağılım Grafiği
+          </h2>
+          <p class="text-sm text-gray-500 mb-3">
+            Not: Grafik verisi `aqi_chart_data.json` dosyasından çekilecektir.
+          </p>
+          <!-- NOT: aqi_chart rotası bir HTML dosyası (charth.html) bekliyor. Bu HTML dosyası Chart.js gibi bir kütüphane kullanarak JSON veriyi görselleştirmelidir. -->
+          <iframe
+            src="{{ url_for('aqi_chart') }}"
+            class="visual-frame rounded-lg shadow-inner"
+          ></iframe>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Veri Kaynakları</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f7f7f7;
+      }
+      .nav-link {
+        transition: all 0.2s;
+      }
+      .nav-link.active {
+        border-color: #4f46e5;
+        color: #4f46e5;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="min-h-screen bg-gray-50 p-6">
+      <!-- Başlık ve Navigasyon -->
+      <header class="bg-white shadow-md rounded-xl p-4 mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">
+          Veri Kaynakları ve Metodoloji
+        </h1>
+        <nav class="mt-4 flex space-x-4 border-b pb-2">
+          <a
+            href="{{ url_for('aqi_panel') }}"
+            class="nav-link hover:border-b-2 border-transparent px-3 py-1 text-gray-600 hover:text-indigo-600"
+            >Özet (AQI)</a
+          >
+          <a
+            href="{{ url_for('aqi_map_graph_panel') }}"
+            class="nav-link hover:border-b-2 border-transparent px-3 py-1 text-gray-600 hover:text-indigo-600"
+            >Harita & Grafik</a
+          >
+          <a
+            href="{{ url_for('decision_support') }}"
+            class="nav-link hover:border-b-2 border-transparent px-3 py-1 text-gray-600 hover:text-indigo-600"
+            >Karar Destek</a
+          >
+          <a
+            href="{{ url_for('data_sources') }}"
+            class="nav-link active border-b-2 px-3 py-1"
+            >Veri Kaynakları</a
+          >
+        </nav>
+      </header>
+
+      <main class="bg-white p-8 rounded-xl shadow-lg space-y-6">
+        <h2 class="text-2xl font-semibold text-gray-700 border-b pb-2">
+          Ana Veri Kaynağı: TEMPO Uydusu
+        </h2>
+        <div class="text-gray-600">
+          <p class="mb-4">
+            Bu sistemin temel verisi, **Troposferik Emisyonlar: İzleme, Kirlilik
+            ve Spektroskopi (TEMPO)** uydusundan elde edilmektedir. TEMPO, Kuzey
+            Amerika üzerinde saatlik olarak hava kalitesi ve atmosferik
+            bileşenlerin ölçümünü yapar.
+          </p>
+          <ul class="list-disc list-inside space-y-2 pl-4">
+            <li>
+              **Ölçülen Parametre:** Azot Dioksit Kolon Yoğunluğu ($NO_2$).
+            </li>
+            <li>
+              **Erişim Yöntemi:** Veriler, NASA'nın dağıtım sistemlerinden
+              (örneğin Earthdata) `earthaccess` modülü aracılığıyla canlı olarak
+              çekilmektedir.
+            </li>
+            <li>**Ürün:** TEMPO Level 2 (L2) ürünleri kullanılmaktadır.</li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-semibold text-gray-700 border-b pb-2 pt-4">
+          Hesaplama Metodolojisi: AQI
+        </h2>
+        <div class="text-gray-600">
+          <p class="mb-4">
+            Azot Dioksit ($NO_2$) verileri, bölgesel olarak ortalaması alınarak
+            ABD Çevre Koruma Ajansı (EPA) standartlarına uygun bir **Hava
+            Kalitesi İndeksi (AQI)** skoruna dönüştürülür.
+          </p>
+          <ul class="list-disc list-inside space-y-2 pl-4">
+            <li>
+              **İşlem:** $NO_2$ konsantrasyonu, standart AQI kırılım noktaları
+              (breakpoints) kullanılarak 0-500 arası bir risk skoruna
+              haritalanır.
+            </li>
+            <li>
+              **Bölgeleme:** Veri, Lat/Lon koordinatlarına göre önceden
+              tanımlanmış coğrafi bölgelere (zonlara) atanır.
+            </li>
+            <li>
+              **Karar Desteği:** AQI skoruna göre (İyi, Orta, Sağlıksız vb.)
+              otomatik olarak öneri eylemleri belirlenir.
+            </li>
+          </ul>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
